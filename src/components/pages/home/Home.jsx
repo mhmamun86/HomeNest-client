@@ -1,7 +1,9 @@
 import React from 'react';
 import HeroSlider from './headers/HeroSlider';
 import FeaturedState from './FeaturedListing';
-import WhyChooseUs from './headers/WhyChooseUs';
+import WhyChooseUs from './WhyChooseUs';
+import MarketInsights from './MarketInsights';
+import OwnerCTA from './OwnerCTA';
 
 const Home = () => {
   return (
@@ -9,6 +11,8 @@ const Home = () => {
       <HeroSlider></HeroSlider>
       <FeaturedState></FeaturedState>
       <WhyChooseUs></WhyChooseUs>
+      <MarketInsights></MarketInsights>
+      <OwnerCTA></OwnerCTA>
     </div>
   );
 };

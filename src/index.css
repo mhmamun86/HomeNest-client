@@ -33,5 +33,5 @@
 }
 
 .main-heading {
-  @apply text-3xl font-extrabold text-gray-800 md:text-4xl;
+  @apply text-4xl md:text-5xl font-extrabold text-gray-800 text-center mb-4;
 }
