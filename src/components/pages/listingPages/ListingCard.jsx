@@ -13,7 +13,6 @@ const ListingCard = ({ listing }) => {
     <div
       className="card w-full h-full bg-base-100 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100"
       data-aos="fade-up"
-      data-aos-delay={listing._id * 100}
     >
       <figure className="aspect-video w-full">
         <img
@@ -49,7 +48,7 @@ const ListingCard = ({ listing }) => {
 
         <div className="card-actions justify-end items-center mt-3">
           <Link
-            to={`/properties/${listing._id}`}
+            to={`/propertie-details/${listing._id}`}
             className="btn btn-sm btn-primary transition duration-300"
           >
             View Details <FaArrowRight className="w-4 h-4 ml-1" />

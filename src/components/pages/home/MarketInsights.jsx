@@ -28,8 +28,7 @@ const MarketInsights = () => {
     <section className="py-16 bg-base-100" data-aos="fade-up">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="lg:flex lg:items-center lg:space-x-12">
-          {/* Left: Content Block */}
-          <div className="lg:w-5/12 mb-8 lg:mb-0" data-aos="fade-right">
+          <div className="lg:w-5/12 mb-8 lg:mb-0">
             <div className="flex items-center text-primary mb-3">
               <FaChartLine className="w-6 h-6 mr-2" />
               <span className="text-lg font-semibold uppercase">
@@ -39,7 +38,6 @@ const MarketInsights = () => {
             <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4">
               Current <span className="text-primary">Market Insights</span>
             </h2>
-            {/* Rule 2: Readable Paragraph */}
             <p className="text-gray-700 text-lg mb-6">
               Stay ahead of the curve with our live market data. Whether you're
               buying or investing, understanding the latest trends is key to
@@ -56,16 +54,11 @@ const MarketInsights = () => {
               </li>
             </ul>
           </div>
-          <div
-            className="lg:w-7/12 grid grid-cols-1 md:grid-cols-3 gap-6"
-            data-aos="fade-left"
-          >
+          <div className="lg:w-7/12 grid grid-cols-1 md:grid-cols-3 gap-6">
             {stats.map((stat, index) => (
               <div
                 key={index}
                 className="bg-base-200 p-6 rounded-lg shadow-xl border-t-4 border-primary/50"
-                data-aos="zoom-in"
-                data-aos-delay={index * 150 + 200}
               >
                 <p className="text-sm font-medium text-gray-500 uppercase mb-1">
                   {stat.label}

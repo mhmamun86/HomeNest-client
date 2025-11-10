@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { Link } from 'react-router';
 import Swal from 'sweetalert2';
 import { fetchMyListing } from '../../../Api/api';
 import { AuthContext } from '../../../contexts/AuthContext';
@@ -27,7 +26,7 @@ const MyProperty = () => {
   }
 
   return (
-    <div className="py-12 bg-base-200 min-h-screen" data-aos="fade-in">
+    <div className="py-12 bg-base-200 min-h-screen">
       <div className="container mx-auto px-4 max-w-7xl">
         <Heading
           title={'My'}

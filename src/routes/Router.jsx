@@ -7,6 +7,8 @@ import Register from '../components/pages/auth/Register';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import AddProperty from '../components/pages/listingPages/AddProperty';
 import MyProperty from '../components/pages/listingPages/MyProperty';
+import PropertyDetailsPage from '../components/pages/listingPages/PropertyDetailsPage';
+import MyRatings from '../components/pages/ratingPages/MyRatings';
 
 export const Router = createBrowserRouter([
   {
@@ -39,6 +41,22 @@ export const Router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyProperty></MyProperty>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'propertie-details/:id',
+        element: (
+          <PrivateRoute>
+            <PropertyDetailsPage></PropertyDetailsPage>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'my-ratings',
+        element: (
+          <PrivateRoute>
+            <MyRatings></MyRatings>
           </PrivateRoute>
         ),
       },

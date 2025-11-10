@@ -22,6 +22,24 @@ export const fetchMyListing = async email => {
   }
 };
 
+export const fetchListingDetails = async id => {
+  try {
+    const result = await api.get(`/listing/${id}`);
+    return result.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchRatings = async () => {
+  try {
+    const result = await api.get('/ratings');
+    return result.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const insertListing = async data => {
   try {
     const res = await api.post('/listing', data);
@@ -30,6 +48,16 @@ export const insertListing = async data => {
     console.log(error);
   }
 };
+
+export const insertRating = async data => {
+  try {
+    const res = await api.post('/ratings', data);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const updateListing = async (id, data) => {
   try {
     const result = await api.patch(`/my-listing/${id}`, data);
