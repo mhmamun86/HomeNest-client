@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaStar, FaLock } from 'react-icons/fa';
 import { FaMessage } from 'react-icons/fa6';
+import Heading from '../../common/Heading';
 
 const serviceData = [
   {
@@ -27,14 +28,13 @@ const WhyChooseUs = () => {
   return (
     <section className="py-16 bg-base-200" data-aos="fade-up">
       <div className="container mx-auto px-4 max-w-7xl">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 text-center mb-4">
-          Why Choose <span className="text-primary">HomeNest?</span>
-        </h2>
-
-        <p className="text-center text-gray-600 mb-16 text-lg max-w-3xl mx-auto">
-          We combine advanced technology with human expertise to make finding or
-          selling your property simpler, faster, and more reliable.
-        </p>
+        <Heading
+          title={'Why Choose'}
+          highlight={'HomeNest?'}
+          subtitle={
+            'We combine advanced technology with human expertise to make finding or selling your property simpler, faster, and more reliable.'
+          }
+        ></Heading>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12">
           {serviceData.map((service, index) => (
             <div

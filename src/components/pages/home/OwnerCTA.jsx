@@ -26,7 +26,10 @@ const OwnerCTA = () => {
             on your investment.
           </p>
 
-          <Link className="btn btn-primary btn-lg font-semibold transition duration-300 transform hover:scale-[1.03] shadow-lg">
+          <Link
+            to={'/add-property'}
+            className="btn btn-primary btn-lg font-semibold transition duration-300 transform hover:scale-[1.03] shadow-lg"
+          >
             List Your Property Today
           </Link>
         </div>

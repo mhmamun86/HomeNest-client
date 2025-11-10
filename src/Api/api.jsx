@@ -5,14 +5,18 @@ const api = axios.create({
 });
 
 export const fetchFeaturedListing = async () => {
-  const res = await api.get('/listing');
-  return res.status === 200 ? res.data : [];
+  try {
+    const res = await api.get('/featured-listing');
+    return res.status === 200 ? res.data : [];
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const fetchMyListing = async email => {
   try {
     const result = await api.get(`/my-listing?email=${email}`);
-    return result.status === 200 ? result.data : [];
+    return result.data;
   } catch (error) {
     console.log(error);
   }
@@ -21,7 +25,24 @@ export const fetchMyListing = async email => {
 export const insertListing = async data => {
   try {
     const res = await api.post('/listing', data);
-    return res.status === 200 ? res.data : [];
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const updateListing = async (id, data) => {
+  try {
+    const result = await api.patch(`/my-listing/${id}`, data);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteListing = async id => {
+  try {
+    const result = await api.delete(`/my-listing/${id}`);
+    return result;
   } catch (error) {
     console.log(error);
   }

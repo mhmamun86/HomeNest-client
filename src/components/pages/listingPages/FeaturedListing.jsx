@@ -3,22 +3,23 @@ import { Link } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import { fetchFeaturedListing } from '../../../Api/api';
 import ListingCard from './ListingCard';
+import Heading from '../../common/Heading';
 const FeaturedListing = () => {
-  const { data } = useQuery({
+  const { data: ListingItems = [], isLoading } = useQuery({
     queryKey: ['post'],
     queryFn: fetchFeaturedListing,
   });
-  const ListingItems = data;
 
   return (
     <section className="py-16 bg-base-200/50" data-aos="fade-up">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 text-center mb-4">
-          Explore Our <span className="text-primary">Featured Homes</span>
-        </h2>
-        <p className="text-center text-gray-600 mb-12 text-lg">
-          Hand-picked properties, updated hourly based on newest arrivals.
-        </p>
+        <Heading
+          title={'Explore Our'}
+          highlight={'Featured Homes'}
+          subtitle={
+            'Hand-picked properties, updated hourly based on newest arrivals.'
+          }
+        ></Heading>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
           {ListingItems?.map(listing => (
             <ListingCard key={listing._id} listing={listing}></ListingCard>

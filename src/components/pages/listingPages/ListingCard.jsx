@@ -1,7 +1,4 @@
-import React from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
-import { IoIosBed } from 'react-icons/io';
-import { MdBathtub } from 'react-icons/md';
 import { AiFillDollarCircle } from 'react-icons/ai';
 import { Link } from 'react-router';
 import { FaArrowRight } from 'react-icons/fa';
@@ -12,8 +9,6 @@ const ListingCard = ({ listing }) => {
       ? `$${listing.price.toLocaleString()}/mo`
       : `$${listing.price.toLocaleString()}`;
 
-  const hasBedBath = listing.beds !== null && listing.baths !== null;
-
   return (
     <div
       className="card w-full h-full bg-base-100 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100"
@@ -22,8 +17,8 @@ const ListingCard = ({ listing }) => {
     >
       <figure className="aspect-video w-full">
         <img
-          src={listing.img}
-          alt={listing.name}
+          src={listing.imageLink}
+          alt={listing.propertyName}
           className="w-full h-full object-cover"
         />
       </figure>
@@ -32,7 +27,7 @@ const ListingCard = ({ listing }) => {
         <div>
           <div className="flex justify-between items-start mb-2">
             <h2 className="card-title text-xl text-secondary">
-              {listing.name}
+              {listing.propertyName}
             </h2>
             <div className="badge badge-accent text-xs font-semibold uppercase">
               {listing.category}
@@ -48,7 +43,7 @@ const ListingCard = ({ listing }) => {
             {listing.location}
           </p>
           <p className="text-gray-700 text-sm mb-4 line-clamp-3">
-            {listing.desc}
+            {listing.description}
           </p>
         </div>
 
