@@ -9,6 +9,15 @@ export const fetchFeaturedListing = async () => {
   return res.status === 200 ? res.data : [];
 };
 
+export const fetchMyListing = async email => {
+  try {
+    const result = await api.get(`/my-listing?email=${email}`);
+    return result.status === 200 ? result.data : [];
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const insertListing = async data => {
   try {
     const res = await api.post('/listing', data);

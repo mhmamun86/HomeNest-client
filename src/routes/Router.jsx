@@ -6,6 +6,7 @@ import Login from '../components/pages/auth/Login';
 import Register from '../components/pages/auth/Register';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import AddProperty from '../components/pages/listingPages/AddProperty';
+import MyProperty from '../components/pages/listingPages/MyProperty';
 
 export const Router = createBrowserRouter([
   {
@@ -30,6 +31,14 @@ export const Router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddProperty></AddProperty>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'my-properties',
+        element: (
+          <PrivateRoute>
+            <MyProperty></MyProperty>
           </PrivateRoute>
         ),
       },
