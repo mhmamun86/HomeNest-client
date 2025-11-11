@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import SearchFilter from './Search';
 import { useQuery } from '@tanstack/react-query';
@@ -18,18 +18,22 @@ import useTitle from '../../../Hooks/useTitle';
 const Properties = () => {
   useTitle('Properties');
   const { user } = useContext(AuthContext);
+  const [sortBy, setSortBy] = useState('Default');
 
   const [filters, setFilters] = useState({
     category: 'All',
     minPrice: '',
     maxPrice: '',
     location: '',
-    sort: '',
+    sort: sortBy,
   });
+  useEffect(() => {
+    const update = { ...filters, sort: sortBy };
+    setFilters(update);
+  }, [sortBy]);
   const handleFilterChange = e => {
     const { value } = e.target;
-    const newFilters = { ...filters, sort: value };
-    setFilters(newFilters);
+    setSortBy(value);
   };
 
   const { data: categoriesData = [] } = useQuery({
@@ -69,6 +73,7 @@ const Properties = () => {
           categoriesData={categoriesData}
           priceRange={priceRange}
           isFetching={isFetching}
+          sortBy={sortBy}
         ></SearchFilter>
       </div>
 
@@ -88,7 +93,7 @@ const Properties = () => {
             <select
               name="sort"
               className="select select-bordered w-2/3 focus:border-primary focus:ring-primary"
-              value={filters.sort}
+              defaultValue={filters.sort}
               onChange={handleFilterChange}
             >
               <option value="default">Default</option>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Spinner from '../../common/Spinner';
 import { FaDollarSign, FaSearch } from 'react-icons/fa';
 
@@ -16,13 +16,16 @@ const SearchFilter = ({
     location: '',
     sort: sortBy,
   });
+  useEffect(() => {
+    setFilters(prev => ({ ...prev, sort: sortBy }));
+  }, [sortBy]);
+
   const handleFilterChange = e => {
     const { name, value } = e.target;
     const newFilters = { ...filters, [name]: value };
     setFilters(newFilters);
     onFilterChange(newFilters);
   };
-
   return (
     <div className="py-12 px-4 md:px-8 bg-base-200" data-aos="fade-up">
       <div className="max-w-6xl mx-auto">
