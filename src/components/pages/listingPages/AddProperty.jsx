@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthContext';
 import SpinnerMain from '../../common/SpinnerMain';
-import { QueryClient, useMutation } from '@tanstack/react-query';
-
+import { useMutation } from '@tanstack/react-query';
 import useTitle from '../../../Hooks/useTitle';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '@/Hooks/useAxiosSecure';
