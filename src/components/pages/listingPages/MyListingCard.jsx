@@ -6,13 +6,10 @@ import { FaCircleInfo, FaLocationDot } from 'react-icons/fa6';
 import { FaDollarSign } from 'react-icons/fa';
 import { useContext, useRef, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
-import {
-  QueryClient,
-  useMutation,
-  useQueryClient,
-} from '@tanstack/react-query';
-import { deleteListing, updateListing } from '../../../Api/api';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
+import { useFormatePrice } from '@/Hooks/useFormatePrice';
+import useAxiosSecure from '@/Hooks/useAxiosSecure';
 
 const MyListingCard = ({ listing }) => {
   const id = listing._id;
@@ -21,10 +18,7 @@ const MyListingCard = ({ listing }) => {
   const modalRef = useRef();
   const { user } = useContext(AuthContext);
   const queryClient = useQueryClient();
-  const formattedPrice =
-    listing.category === 'Rental'
-      ? `$${listing.price.toLocaleString()}/mo`
-      : `$${listing.price.toLocaleString()}`;
+
   const posted = new Date(listing.createdAt).toLocaleDateString();
 
   const [formData, setFormData] = useState({
@@ -51,11 +45,19 @@ const MyListingCard = ({ listing }) => {
     }));
   };
 
+  const secureApi = useAxiosSecure();
   const updateData = useMutation({
-    mutationFn: data => updateListing(id, data),
+    mutationFn: async data => {
+      try {
+        const result = await secureApi.patch(`/my-listing/${id}`, data);
+        return result;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     onSuccess: (data, postData) => {
-      console.log(data, postData);
-      queryClient.setQueryData(['my-listing'], oldData => {
+      // console.log(data, postData);
+      queryClient.setQueryData(['my-listing', user?.email], oldData => {
         return oldData.map(el =>
           el._id === postData._id ? { ...el, ...postData } : el
         );
@@ -87,10 +89,17 @@ const MyListingCard = ({ listing }) => {
   };
 
   const deleteLM = useMutation({
-    mutationFn: id => deleteListing(id),
+    mutationFn: async id => {
+      try {
+        const result = await secureApi.delete(`/my-listing/${id}`);
+        return result;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     onSuccess: (res, data) => {
       console.log(data, res);
-      queryClient.setQueryData(['my-listing'], prevData => {
+      queryClient.setQueryData(['my-listing', user?.email], prevData => {
         return prevData.filter(item => item._id !== data);
       });
       if (data.data.deletedCount) {
@@ -141,7 +150,7 @@ const MyListingCard = ({ listing }) => {
 
           <p className="text-lg font-bold text-primary mb-2 flex items-center gap-1">
             <FaDollarSign className="w-5 h-5 text-primary" />
-            {formattedPrice}
+            {useFormatePrice(listing)}
           </p>
 
           <div className="text-gray-600 space-y-1 text-sm mb-4">

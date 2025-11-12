@@ -4,15 +4,17 @@ import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthContext';
 import Spinner from '../../common/Spinner';
 import { QueryClient, useMutation } from '@tanstack/react-query';
-import { insertListing } from '../../../Api/api';
+
 import useTitle from '../../../Hooks/useTitle';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '@/Hooks/useAxiosSecure';
 
 const AddProperty = () => {
   useTitle('Add Property');
   const [form, setForm] = useState(null);
   const { user, loading } = useContext(AuthContext);
   const navigate = useNavigate();
+  const secureApi = useAxiosSecure();
   if (loading) {
     return <Spinner></Spinner>;
   }
@@ -25,7 +27,14 @@ const AddProperty = () => {
   ];
 
   const insertData = useMutation({
-    mutationFn: data => insertListing(data),
+    mutationFn: async data => {
+      try {
+        const res = await secureApi.post('/listing', data);
+        return res.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     onSuccess: (data, insertedData) => {
       // console.log(data, insertedData);
       if (data.insertedId) {

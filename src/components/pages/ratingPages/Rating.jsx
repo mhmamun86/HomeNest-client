@@ -3,14 +3,20 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { fetchRatings, insertRating } from '../../../Api/api';
 import Spinner from '../../common/Spinner';
+import useAxiosSecure from '@/Hooks/useAxiosSecure';
+import { fetchRatings } from '@/Api/api';
 
 const Rating = ({ property }) => {
   const { user } = useContext(AuthContext);
+  const secureApi = useAxiosSecure();
   const { data: reviewData, isLoading } = useQuery({
     queryKey: ['all-ratings', property._id],
     queryFn: () => fetchRatings(property._id),
+    onError: error => {
+      toast.error('Error to get ratings!');
+      console.log(error);
+    },
   });
   const queryClient = useQueryClient();
   const [form, setForm] = useState(null);
@@ -18,9 +24,15 @@ const Rating = ({ property }) => {
   const [myReviewText, setMyReviewText] = useState('');
 
   const addReview = useMutation({
-    mutationFn: data => insertRating(data),
+    mutationFn: async data => {
+      try {
+        const res = await secureApi.post('/ratings', data);
+        return res.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     onSuccess: (res, data) => {
-      // console.log(data, res);
       queryClient.setQueryData(['all-ratings', property._id], oldData => {
         return [...oldData, data];
       });

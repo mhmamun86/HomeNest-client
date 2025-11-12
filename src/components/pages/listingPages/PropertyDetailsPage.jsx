@@ -3,18 +3,27 @@ import { FaDollarSign } from 'react-icons/fa';
 import { FaCalendarDays, FaLocationDot } from 'react-icons/fa6';
 import { IoIosMailOpen } from 'react-icons/io';
 import { useNavigate, useParams } from 'react-router';
-import { fetchListingDetails } from '../../../Api/api';
+
 import Rating from '../ratingPages/Rating';
 import useTitle from '../../../Hooks/useTitle';
 import { useFormatePrice } from '../../../Hooks/useFormatePrice';
 import { useFormateDate } from '../../../Hooks/useFormateDate';
+import useAxiosSecure from '@/Hooks/useAxiosSecure';
 
 const PropertyDetailsPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const secureApi = useAxiosSecure();
   const { data: property, isLoading } = useQuery({
     queryKey: ['listing-details'],
-    queryFn: () => fetchListingDetails(id),
+    queryFn: async () => {
+      try {
+        const result = await secureApi.get(`/listing/${id}`);
+        return result.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
   });
   // console.log(property);
   const detailTextStyle = 'text-lg text-secondary font-semibold';
@@ -23,7 +32,7 @@ const PropertyDetailsPage = () => {
     return (
       <div className="flex justify-center items-center min-h-[50vh] bg-base-200">
         <span className="loading loading-spinner loading-lg text-primary"></span>
-        <p className="ml-3 text-lg text-gray-700">
+        <p className="ml-3 text-lg text-base-300">
           Loading Property Details...
         </p>
       </div>
@@ -36,7 +45,7 @@ const PropertyDetailsPage = () => {
         <h2 className="text-4xl font-extrabold text-secondary md:text-5xl">
           Property <span className="text-error">Not Found</span>
         </h2>
-        <p className="text-xl text-gray-600 mt-4">
+        <p className="text-xl text-base-300 mt-4">
           The listing you are looking for does not exist or may have been sold.
         </p>
         <button

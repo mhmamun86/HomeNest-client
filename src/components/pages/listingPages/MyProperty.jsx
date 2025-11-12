@@ -7,17 +7,29 @@ import { AuthContext } from '../../../contexts/AuthContext';
 import MyListingCard from './MyListingCard';
 import MyListingSkeleton from '../../common/MyListingSkeleton';
 import Heading from '../../common/Heading';
+import useAxiosSecure from '@/Hooks/useAxiosSecure';
+import useTitle from '@/Hooks/useTitle';
 
 const MyProperty = () => {
+  useTitle('My Property');
   const { user } = useContext(AuthContext);
+  const secureApi = useAxiosSecure();
+
   const { data: myListings = [], isLoading } = useQuery({
-    queryKey: ['my-listing'],
-    queryFn: () => fetchMyListing(user.email),
+    queryKey: ['my-listing', user?.email],
+    queryFn: async () => {
+      try {
+        const result = await secureApi.get(`/my-listing?email=${user.email}`);
+        return result.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
   });
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+      <div className="grid max-w-11/12 mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
         {Array.from({ length: 6 }).map((_, i) => (
           <MyListingSkeleton key={i} />
         ))}

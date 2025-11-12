@@ -1,9 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router';
+import { Link } from 'react-router';
 import { AuthContext } from '../../contexts/AuthContext';
 import { toast } from 'react-toastify';
 import MyLink from './MyLink';
-import { CiHome } from 'react-icons/ci';
+import {
+  MdNoteAdd,
+  MdOutlineHome,
+  MdOutlineRealEstateAgent,
+  MdRealEstateAgent,
+  MdStarBorder,
+} from 'react-icons/md';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,7 +27,7 @@ const Navbar = () => {
   const { user, loading, logOut } = useContext(AuthContext);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
-
+  console.log(user);
   useEffect(() => {
     const html = document.querySelector('html');
     html.setAttribute('data-theme', theme);
@@ -52,21 +58,30 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { label: 'Home', to: '/', icon: <CiHome /> },
-    { label: 'All Properties', to: '/properties', icon: <CiHome /> },
+    { label: 'Home', to: '/', icon: <MdOutlineHome /> },
+    {
+      label: 'All Properties',
+      to: '/properties',
+      icon: <MdOutlineRealEstateAgent />,
+    },
     {
       label: 'Add Property',
       to: '/add-property',
-      icon: <CiHome />,
+      icon: <MdNoteAdd />,
       auth: true,
     },
     {
       label: 'My Properties',
       to: '/my-properties',
-      icon: <CiHome />,
+      icon: <MdRealEstateAgent />,
       auth: true,
     },
-    { label: 'My Ratings', to: '/my-ratings', icon: <CiHome />, auth: true },
+    {
+      label: 'My Ratings',
+      to: '/my-ratings',
+      icon: <MdStarBorder />,
+      auth: true,
+    },
   ];
 
   const authUI = loading ? (
@@ -136,83 +151,6 @@ const Navbar = () => {
       data-aos="fade-down"
     >
       <div className="navbar-start">
-        {/* <button
-          onClick={handleTheme}
-          className="btn btn-ghost btn-circle transition-all duration-300"
-          aria-label="Toggle Theme"
-        >
-          {localStorage.getItem('theme') === 'homenestDark' ? (
-            <Sun className="h-5 w-5 text-yellow-400" />
-          ) : (
-            <Moon className="h-5 w-5 text-gray-700" />
-          )}
-        </button> */}
-        <div className="">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline">
-                <FaBarsStaggered />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              className="w-56 bg-base-100 text-neutral "
-              align="start"
-            >
-              {navLinks
-                .filter(item => !item.auth || isLoggedIn)
-                .map((item, idx) => (
-                  <DropdownMenuItem key={idx}>
-                    <MyLink to={item.to} className="flex items-center gap-1">
-                      {item.label}
-                    </MyLink>
-                    <DropdownMenuShortcut>{item.icon}</DropdownMenuShortcut>
-                  </DropdownMenuItem>
-                ))}
-              <DropdownMenuItem>
-                <button
-                  onClick={handleTheme}
-                  className="flex items-center gap-1"
-                >
-                  {theme === 'homenestDark' ? (
-                    <Sun className="h-5 w-5 text-yellow-400" />
-                  ) : (
-                    <Moon className="h-5 w-5 text-gray-700" />
-                  )}
-                  {theme === 'homenestDark' ? 'Light Mode' : 'Dark Mode'}
-                </button>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-        <div className="dropdown">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost lg:hidden hover:bg-transparent"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52 text-neutral"
-          >
-            {}
-          </ul>
-        </div>
-
         <Link
           to="/"
           className="btn btn-ghost normal-case text-xl hover:bg-transparent"
@@ -251,6 +189,40 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">{authUI}</div>
+      <div className="ml-3 lg:hidden">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline">
+              <FaBarsStaggered />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            className="w-56 bg-base-100 text-neutral "
+            align="end"
+          >
+            {navLinks
+              .filter(item => !item.auth || isLoggedIn)
+              .map((item, idx) => (
+                <DropdownMenuItem key={idx}>
+                  <MyLink to={item.to} className="flex items-center gap-1">
+                    {item.label}
+                  </MyLink>
+                  <DropdownMenuShortcut>{item.icon}</DropdownMenuShortcut>
+                </DropdownMenuItem>
+              ))}
+            <DropdownMenuItem onClick={handleTheme}>
+              <button className="flex items-center gap-1">
+                {theme === 'homenestDark' ? (
+                  <Sun className="h-5 w-5 text-yellow-400" />
+                ) : (
+                  <Moon className="h-5 w-5 text-gray-700" />
+                )}
+                {theme === 'homenestDark' ? 'Light Mode' : 'Dark Mode'}
+              </button>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </div>
   );
 };

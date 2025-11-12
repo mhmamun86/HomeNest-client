@@ -22,8 +22,8 @@ const ListingCard = ({ listing }) => {
         />
       </figure>
 
-      <div className="card-body p-5 flex flex-col justify-between">
-        <div>
+      <div className="card-body p-0 pt-0  flex flex-col  justify-between">
+        <div className="card-content p-5 rounded-b-2xl">
           <div className="flex justify-between items-start mb-2">
             <h2 className="card-title text-xl text-secondary-content">
               {listing.propertyName}
