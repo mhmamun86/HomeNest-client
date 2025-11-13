@@ -15,7 +15,7 @@ const useAxiosSecure = () => {
       async config => {
         if (user) {
           const token = await user.accessToken;
-          console.log(token, 'from hook');
+          // console.log(token, 'from hook');
           config.headers.authorization = `Bearer ${token}`;
         }
         return config;

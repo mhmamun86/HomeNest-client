@@ -148,15 +148,15 @@ const MyListingCard = ({ listing }) => {
             {listing.category}
           </div>
 
-          <p className="text-lg font-bold text-primary mb-2 flex items-center gap-1">
-            <FaDollarSign className="w-5 h-5 text-primary" />
+          <p className="flex gap-2 items-center text-2xl text-green-600 ">
+            <h2 className="text-neutral text-xl">Price: </h2>{' '}
             {useFormatePrice(listing)}
           </p>
 
           <div className="text-base-300 space-y-1 text-sm mb-4">
-            <p className="flex items-center">
-              <FaLocationDot className="w-4 h-4 mr-1 text-primary/70" />{' '}
-              <p className="line-clamp-2">{listing.location}</p>
+            <p className="flex gap-2 items-center">
+              <h2 className="text-neutral ">Location:</h2>
+              {listing.location}
             </p>
             <p className="font-medium">Posted: {posted}</p>
           </div>

@@ -7,10 +7,10 @@ import Register from '../components/pages/auth/Register';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import AddProperty from '../components/pages/listingPages/AddProperty';
 import MyProperty from '../components/pages/listingPages/MyProperty';
-import PropertyDetailsPage from '../components/pages/listingPages/PropertyDetailsPage';
 import MyRatings from '../components/pages/ratingPages/MyRatings';
 import Properties from '../components/pages/listingPages/Properties';
 import NotFound from '@/components/common/NotFound';
+import PropertyDetails from '@/components/pages/listingPages/PropertieDetails';
 
 export const Router = createBrowserRouter([
   {
@@ -55,7 +55,7 @@ export const Router = createBrowserRouter([
         path: 'propertie-details/:id',
         element: (
           <PrivateRoute>
-            <PropertyDetailsPage></PropertyDetailsPage>
+            <PropertyDetails></PropertyDetails>
           </PrivateRoute>
         ),
       },

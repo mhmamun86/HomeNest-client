@@ -84,7 +84,7 @@ const Rating = ({ property }) => {
 
   return (
     <section
-      className="flex flex-col md:flex-row gap-8 justify-between items-center mt-12 max-w-7xl mx-auto p-6 bg-base-100 rounded-lg shadow-xl border border-gray-200"
+      className="flex flex-col  gap-8 justify-between items-center mt-12 max-w-7xl mx-auto bg-base-100 rounded-lg "
       data-aos="fade-down"
     >
       <div className="flex-1 w-full">
@@ -155,7 +155,7 @@ const Rating = ({ property }) => {
           )}
         </div>
       </div>
-      <div className="flex-1">
+      <div className="flex-1 w-full">
         {user ? (
           !hasReviewed ? (
             <div className="mt-8 ">
@@ -164,11 +164,12 @@ const Rating = ({ property }) => {
               </h4>
               <form onSubmit={handleReviewSubmit} className="space-y-4">
                 <div className="form-control">
-                  <label className="label">
+                  <label className="label mb-2">
                     <span className="label-text font-medium text-secondary">
                       Your Rating ({myRating} stars)
                     </span>
                   </label>
+                  <br />
                   <div className="rating rating-lg">
                     {[1, 2, 3, 4, 5].map(i => (
                       <input
@@ -189,7 +190,7 @@ const Rating = ({ property }) => {
                     </span>
                   </label>
                   <textarea
-                    className="textarea textarea-bordered border-gray-200 text-neutral  h-24 focus:border-primary focus:ring-primary"
+                    className="textarea textarea-bordered border-gray-200 text-neutral w-full h-24 focus:border-primary focus:ring-primary"
                     placeholder="Share your experience "
                     value={myReviewText}
                     onChange={e => setMyReviewText(e.target.value)}
@@ -204,7 +205,7 @@ const Rating = ({ property }) => {
                       Submitting...
                     </Badge>
                   ) : (
-                    'Add Property'
+                    'Submit'
                   )}
                 </button>
               </form>

@@ -33,12 +33,13 @@ const PropertiesCard = ({ listing }) => {
             </div>
           </div>
 
-          <div className="text-lg font-bold text-primary mb-2 flex items-center gap-1">
-            <FaDollarSign className="w-5 h-5 text-primary" /> {formattedPrice}
+          <div className="text-lg font-bold text-primary mb-2 flex items-center gap-2">
+            <h2 className="text-neutral text-xl font-normal">Price: </h2>{' '}
+            {formattedPrice}
           </div>
 
-          <p className="flex items-center text-base-300 mb-3 text-sm">
-            <FaLocationDot className="w-4 h-4 mr-1" />{' '}
+          <p className="flex gap-2 items-center text-base-300 mb-3 text-sm">
+            <h2 className="text-neutral ">Location:</h2>
             <p className="line-clamp-2"> {listing.location}</p>
           </p>
 

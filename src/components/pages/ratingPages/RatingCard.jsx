@@ -1,15 +1,6 @@
 import React from 'react';
-import { FaRegEdit, FaStar } from 'react-icons/fa';
-import { RiDeleteBin6Fill } from 'react-icons/ri';
-import { toast } from 'react-toastify';
 
 const RatingCard = ({ rating }) => {
-  // const handleUpdate = rating => {
-  //   toast.info(`Updating review for: ${rating.propertyName}`);
-  // };
-  // const handleDelete = rating => {
-  //   toast.warning(`Deleting review for: ${rating.propertyName}`);
-  // };
   return (
     <div
       className="card lg:card-side bg-base-100 shadow-xl border border-gray-100"
@@ -25,7 +16,7 @@ const RatingCard = ({ rating }) => {
 
       <div className="card-body p-6 w-full">
         <div className="flex justify-between items-start">
-          <h3 className="card-title text-2xl text-secondary">
+          <h3 className="card-title text-2xl text-secondary line-clamp-2">
             {rating.propertyName}
           </h3>
           <span className="text-sm text-neutral font-medium">
@@ -46,7 +37,9 @@ const RatingCard = ({ rating }) => {
           </div>
           <span className="text-base-300 font-bold">({rating.rating} / 5)</span>
         </div>
-        <p className="text-base-300 italic mb-4">"{rating.review}"</p>
+        <p className="text-base-300 italic mb-4 line-clamp-5">
+          "{rating.review}"
+        </p>
         <p className="text-sm font-semibold text-base-300 border-t pt-2 mt-2">
           Reviewer: <span className="text-primary">{rating.reviewerName}</span>
         </p>
