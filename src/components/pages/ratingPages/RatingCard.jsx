@@ -4,12 +4,12 @@ import { RiDeleteBin6Fill } from 'react-icons/ri';
 import { toast } from 'react-toastify';
 
 const RatingCard = ({ rating }) => {
-  const handleUpdate = rating => {
-    toast.info(`Updating review for: ${rating.propertyName}`);
-  };
-  const handleDelete = rating => {
-    toast.warning(`Deleting review for: ${rating.propertyName}`);
-  };
+  // const handleUpdate = rating => {
+  //   toast.info(`Updating review for: ${rating.propertyName}`);
+  // };
+  // const handleDelete = rating => {
+  //   toast.warning(`Deleting review for: ${rating.propertyName}`);
+  // };
   return (
     <div
       className="card lg:card-side bg-base-100 shadow-xl border border-gray-100"
@@ -50,7 +50,7 @@ const RatingCard = ({ rating }) => {
         <p className="text-sm font-semibold text-base-300 border-t pt-2 mt-2">
           Reviewer: <span className="text-primary">{rating.reviewerName}</span>
         </p>
-        <div className="card-actions justify-end mt-4">
+        {/* <div className="card-actions justify-end mt-4">
           <button
             className="btn btn-sm btn-outline btn-info transition duration-300 gap-2"
             onClick={() => handleUpdate(rating)}
@@ -63,7 +63,7 @@ const RatingCard = ({ rating }) => {
           >
             <RiDeleteBin6Fill className="w-4 h-4" /> Delete
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
